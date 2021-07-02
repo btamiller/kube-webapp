@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: lolbackend
+spec:
+ selector:
+   role: backend
+ ports:
+   - protocol: TCP
+     port: 9090
+     targetPort: 9090
+     nodePort: 32001
+ type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: backend-deployment
+ labels:
+   role: backend
+spec:
+ replicas: 3
+ selector:
+   matchLabels:
+     role: backend
+ template:
+   metadata:
+     labels:
+       role: backend
+   spec:
+     containers:
+     - name: backend-app
+       image: "timmillergcpuser/test-webapp-backend:0.2"
+       ports:
+       - name: backapp
+         containerPort: 9090
