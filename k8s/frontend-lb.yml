@@ -38,5 +38,5 @@ metadata:
   name: basic-ingress
 spec:
   backend:
-    serviceName: frontend
+    serviceName: lolfrontend
     servicePort: 80
