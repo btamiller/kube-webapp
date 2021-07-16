@@ -32,11 +32,18 @@ spec:
      - name: frontend-app
        image: "timmillergcpuser/test-webapp-frontend:0.2d3"
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: basic-ingress
+  name: basic-ingress spec:
 spec:
-  backend:
-    serviceName: lolfrontend
-    servicePort: 80
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: test
+            port:
+              number: 80
